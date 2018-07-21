@@ -1,4 +1,4 @@
-package encoderclient;
+package company.encoderclient;
 
 public class EncoderClient {
 }

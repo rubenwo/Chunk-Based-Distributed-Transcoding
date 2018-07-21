@@ -1,4 +1,4 @@
-package encoderclient.CLI;
+package company.encoderclient.CLI;
 
 public class EncoderCLI {
 }

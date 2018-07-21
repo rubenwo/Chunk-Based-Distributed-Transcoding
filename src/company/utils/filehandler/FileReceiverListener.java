@@ -1,4 +1,4 @@
-package utils.filehandler;
+package company.utils.filehandler;
 
 public interface FileReceiverListener {
 }
