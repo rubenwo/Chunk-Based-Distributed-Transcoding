@@ -37,7 +37,7 @@ public class FilesHandler {
         }
     }
 
-    public static void GenerateChunkFile(String tempdir) {
-
+    public static void DoSingleFileCleanUp(String filePath) throws IOException {
+        Files.delete(Paths.get(filePath));
     }
 }

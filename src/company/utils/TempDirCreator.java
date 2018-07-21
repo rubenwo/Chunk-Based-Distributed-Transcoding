@@ -13,6 +13,8 @@ public class TempDirCreator {
 
         Path tempDir = Files.createTempDirectory(uniqueID);
         workingDirectory = tempDir.toString() + "/";
+        Files.createDirectory(Paths.get(workingDirectory + "chunks"));
+        Files.createDirectory(Paths.get(workingDirectory + "transcoded"));
 
         new TempDirCreator(workingDirectory, operatingSystem);
 

@@ -5,15 +5,11 @@ import company.Constants;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class ChunkGenerater {
-    public static void GenerateChunks(String encoderPath, String input, FFmpegListener ffmpegListener) throws IOException {
+    public static void GenerateChunks(String encoderPath, String input, FFmpegListener ffmpegListener) {
         String command = "-map 0 -c copy -f segment -segment_time " + Constants.CHUNK_SIZE;
-        String output = encoderPath.substring(0, input.lastIndexOf("/")) + "/chunks";
-        Files.createDirectory(Paths.get(output));
-        output += "/chunk_%03d" + input.substring(input.lastIndexOf("."));
+        String output = encoderPath.substring(0, input.lastIndexOf("/")) + "/chunks/chunk_%03d" + input.substring(input.lastIndexOf("."));
         new Thread(new FFmpegHandler(encoderPath, input, command, output, ffmpegListener, CommandType.GENERATE_CHUNKS)).start();
     }
 
@@ -25,8 +21,7 @@ public class ChunkGenerater {
 
         PrintWriter printWriter = new PrintWriter(concatFile);
         for (File chunk : listOfChunks)
-            printWriter.println("file \'" + chunk.getAbsolutePath() + "\'");
-
+            printWriter.println("file \'" + chunk.getAbsolutePath().replace("\\", "/").replaceAll("chunks", "transcoded") + "\'");
         printWriter.close();
 
         return concatFile.getAbsolutePath();

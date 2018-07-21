@@ -12,6 +12,7 @@ import java.util.UUID;
 public class ChunkGeneraterTest implements FFmpegListener {
     private String tempDir = null;
     private String chunkFile;
+    private String input;
 
     public ChunkGeneraterTest() throws IOException {
         OperatingSystem operatingSystem = OperatingSystem.detectOperatingSystem();
@@ -31,7 +32,7 @@ public class ChunkGeneraterTest implements FFmpegListener {
             e.printStackTrace();
         }
 
-        String input = tempDir + "big_buck_bunny.mp4";
+        input = tempDir + "big_buck_bunny.mp4";
         ChunkGenerater.GenerateChunks(tempDir + "ffmpeg", input, this);
     }
 
@@ -50,6 +51,7 @@ public class ChunkGeneraterTest implements FFmpegListener {
         System.out.println("Done generating chunks!");
         try {
             chunkFile = ChunkGenerater.GenerateConcatFile(tempDir);
+            FilesHandler.DoSingleFileCleanUp(input);
             new ChunkConcatenaterTest(tempDir + "ffmpeg", chunkFile);
         } catch (IOException e) {
             e.printStackTrace();
