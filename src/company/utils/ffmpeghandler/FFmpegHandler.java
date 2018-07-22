@@ -64,7 +64,7 @@ public class FFmpegHandler implements Runnable {
 
             while ((line = processOutputReader.readLine()) != null) {
                 System.out.println(line);
-                if (commandType.equals(CommandType.GENERATE_CHUNKS) || commandType.equals(CommandType.TRANSCODE)) {
+                if (commandType.equals(CommandType.TRANSCODE)) {
                     if (line.contains("Duration")) {
                         String[] durationString = line.split(",")[0].substring(12, 23).split(":");
                         durationMillis += Integer.valueOf(durationString[0]) * 3600000;
@@ -88,7 +88,7 @@ public class FFmpegHandler implements Runnable {
                 }
             }
             ffmpeg.waitFor();
-            listener.onJobDone();
+            listener.onJobDone(commandType);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

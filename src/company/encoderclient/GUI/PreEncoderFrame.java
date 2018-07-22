@@ -20,7 +20,7 @@ public class PreEncoderFrame {
         JTextField getIpaddr = new JTextField();
 
         getIpaddr.addActionListener(e -> {
-            new EncoderClient(getIpaddr.getText());
+            new EncoderClient(getIpaddr.getText(), false);
             frame.dispose();
         });
 
@@ -29,7 +29,7 @@ public class PreEncoderFrame {
 
         JButton startNode = new JButton("Start Encoder Node");
         startNode.addActionListener(e -> {
-            new EncoderClient(getIpaddr.getText());
+            new EncoderClient(getIpaddr.getText(), false);
             frame.dispose();
         });
 

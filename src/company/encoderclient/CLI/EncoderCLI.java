@@ -12,7 +12,7 @@ public class EncoderCLI {
         System.out.println("Please enter the Server IP-Address:");
         String serverIP = input.nextLine();
 
-        encoderClient = new EncoderClient(serverIP);
+        encoderClient = new EncoderClient(serverIP, true);
     }
 
     public static void main(String[] args) {

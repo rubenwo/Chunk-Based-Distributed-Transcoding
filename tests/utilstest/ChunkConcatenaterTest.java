@@ -1,6 +1,7 @@
 package utilstest;
 
 import company.utils.ffmpeghandler.ChunkConcatenater;
+import company.utils.ffmpeghandler.CommandType;
 import company.utils.ffmpeghandler.FFmpegListener;
 
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class ChunkConcatenaterTest implements FFmpegListener {
     }
 
     @Override
-    public void onJobDone() {
+    public void onJobDone(CommandType type) {
         System.out.println("Done concatenating file!");
     }
 }

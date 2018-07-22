@@ -49,7 +49,7 @@ public class FFmpegHandlerTest implements FFmpegListener {
     }
 
     @Override
-    public void onJobDone() {
+    public void onJobDone(CommandType type) {
         System.out.println("Finished transcoding!");
     }
 

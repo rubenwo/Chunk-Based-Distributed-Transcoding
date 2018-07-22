@@ -5,5 +5,5 @@ public interface FFmpegListener {
 
     void onProgressUpdate(double progress);
 
-    void onJobDone();
+    void onJobDone(CommandType type);
 }

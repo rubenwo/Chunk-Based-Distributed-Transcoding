@@ -1,15 +1,16 @@
 package company.utils.filehandler;
 
-public class FileReceiver {
-    private static FileReceiver instance = null;
+public class FileReceiver implements Runnable {
+    private FileReceiverListener receiverListener;
+    private String fileName;
+    private String tempDir;
 
-    public static FileReceiver getInstance() {
-        if (instance == null)
-            instance = new FileReceiver();
-        return instance;
+    public FileReceiver(FileReceiverListener receiverListener, String fileName, String tempDir) {
+        this.receiverListener = receiverListener;
     }
 
-    public FileReceiver() {
+    @Override
+    public void run() {
 
     }
 }

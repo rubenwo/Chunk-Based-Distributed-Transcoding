@@ -3,6 +3,7 @@ package utilstest;
 import company.utils.OperatingSystem;
 import company.utils.TempDirCreator;
 import company.utils.ffmpeghandler.ChunkGenerater;
+import company.utils.ffmpeghandler.CommandType;
 import company.utils.ffmpeghandler.FFmpegListener;
 import company.utils.filehandler.FilesHandler;
 
@@ -47,7 +48,7 @@ public class ChunkGeneraterTest implements FFmpegListener {
     }
 
     @Override
-    public void onJobDone() {
+    public void onJobDone(CommandType type) {
         System.out.println("Done generating chunks!");
         try {
             chunkFile = ChunkGenerater.GenerateConcatFile(tempDir);

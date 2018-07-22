@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ConnectionHandler implements Runnable {
+    private Status status = Status.IDLE;
     private ArrayList<String> onlineEncoders;
     private Socket socket;
     private ObjectInputStream fromClient;
@@ -15,17 +16,19 @@ public class ConnectionHandler implements Runnable {
 
     private ClientStatusListener clientStatusListener;
     private EncoderProgressListener progressListener;
+    private InputsListener inputsListener;
 
     private String clientID;
     private String clientIP;
 
     private boolean running = true;
 
-    public ConnectionHandler(Socket socket, ArrayList<String> onlineEncoders, ClientStatusListener clientStatusListener, EncoderProgressListener progressListener) {
+    public ConnectionHandler(Socket socket, ArrayList<String> onlineEncoders, ClientStatusListener clientStatusListener, EncoderProgressListener progressListener, InputsListener inputsListener) {
         this.socket = socket;
         this.onlineEncoders = onlineEncoders;
         this.clientStatusListener = clientStatusListener;
         this.progressListener = progressListener;
+        this.inputsListener = inputsListener;
         try {
             init();
         } catch (IOException e) {
@@ -65,21 +68,27 @@ public class ConnectionHandler implements Runnable {
                 byte dataType = fromClient.readByte();
                 switch (dataType) {
                     case 0:
-                        // Input files
+                        try {
+                            String[] inputs = (String[]) fromClient.readObject();
+                            inputsListener.onInputsAvailable(inputs);
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
                         break;
                     case 1:
-                        // Commands for encoders
+                        String command = fromClient.readUTF();
+                        inputsListener.onCommandAvailable(command);
                         break;
                     case 2:
                         double progress = fromClient.readDouble();
                         progressListener.onProgressUpdate(this.clientID, progress);
                         break;
                     case 3:
-                        // Encoder is ready to receive a file.
+                        startFileSenderThread();
                         break;
                     case 4:
-                        // Encoder is done encoding
-                        // Initialize a file receiver on Server-Side
+                        startFileReceiverThread();
+                        setStatus(Status.IDLE);
                         break;
                 }
             } catch (IOException e) {
@@ -111,11 +120,49 @@ public class ConnectionHandler implements Runnable {
         }
     }
 
+    public void sendCommandToEncoder(String command) {
+        try {
+            toClient.writeByte(0);
+            toClient.flush();
+            toClient.writeUTF(command);
+            toClient.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendFile(String filename) {
+        try {
+            toClient.writeByte(1);
+            toClient.flush();
+            toClient.writeUTF(filename);
+            toClient.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void startFileSenderThread() {
+
+    }
+
+    private void startFileReceiverThread() {
+
+    }
+
     public void shutdown() {
         running = false;
     }
 
     public String getClientID() {
         return clientID;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
