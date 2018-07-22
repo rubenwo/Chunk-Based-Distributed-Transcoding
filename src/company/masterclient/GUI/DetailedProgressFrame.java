@@ -1,7 +1,5 @@
 package company.masterclient.GUI;
 
-import company.masterclient.MasterClient;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -50,7 +48,8 @@ public class DetailedProgressFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        updateCurrentJob(MasterClient.encoderProgress.get(encoderID));
+        //updateCurrentJob(MasterClient.get(encoderID));
+        System.out.println("Update...");
     }
 
     private void updateCurrentJob(double progress) {

@@ -9,14 +9,14 @@ public class MasterFrame {
     private String[] inputs;
     private OnlineClientPanel onlineClientPanel;
 
-    public MasterFrame(ArrayList<String> onlineClients) {
+    public MasterFrame(ArrayList<String> onlineEncoders) {
         JFrame frame = new JFrame("Distributed Transcoding Master");
         frame.setPreferredSize(new Dimension(1280, 720));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         JPanel contentPane = new JPanel(new BorderLayout());
 
-        onlineClientPanel = new OnlineClientPanel(onlineClients);
+        onlineClientPanel = new OnlineClientPanel(onlineEncoders);
         onlineClientPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 
         JPanel ffmpegOptionPanel = new FFmpegOptionPanel(this);
