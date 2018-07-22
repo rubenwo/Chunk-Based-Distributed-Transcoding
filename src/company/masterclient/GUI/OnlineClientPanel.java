@@ -10,14 +10,12 @@ import java.util.ArrayList;
 public class OnlineClientPanel extends JPanel {
     private ArrayList<String> onlineClients;
     private JList onlineClientJList;
-    private SlaveStatusListener slaveStatusListener;
 
     private DetailedProgressFrame detailedProgressFrame;
 
 
-    public OnlineClientPanel(ArrayList<String> onlineClients, SlaveStatusListener slaveStatusListener) {
+    public OnlineClientPanel(ArrayList<String> onlineClients) {
         this.onlineClients = onlineClients;
-        this.slaveStatusListener = slaveStatusListener;
         buildClientList();
     }
 
@@ -30,8 +28,7 @@ public class OnlineClientPanel extends JPanel {
                 System.out.println(onlineClientJList.getSelectedValue());
                 if (detailedProgressFrame != null)
                     detailedProgressFrame.dispose();
-                detailedProgressFrame = new DetailedProgressFrame((String) onlineClientJList.getSelectedValue(), slaveStatusListener);
-                slaveStatusListener.onSlaveProgressRequest((String) onlineClientJList.getSelectedValue());
+                detailedProgressFrame = new DetailedProgressFrame((String) onlineClientJList.getSelectedValue());
             }
 
             @Override
@@ -50,8 +47,7 @@ public class OnlineClientPanel extends JPanel {
                 System.out.println(onlineClientJList.getSelectedValue());
                 if (detailedProgressFrame != null)
                     detailedProgressFrame.dispose();
-                detailedProgressFrame = new DetailedProgressFrame((String) onlineClientJList.getSelectedValue(), slaveStatusListener);
-                slaveStatusListener.onSlaveProgressRequest((String) onlineClientJList.getSelectedValue());
+                detailedProgressFrame = new DetailedProgressFrame((String) onlineClientJList.getSelectedValue());
             }
 
             @Override

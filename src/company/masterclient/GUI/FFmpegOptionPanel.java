@@ -19,7 +19,7 @@ public class FFmpegOptionPanel extends JPanel {
     private String[] outputFilesFormats = {"Select a output File Format", ".mkv", ".mp4", ".mov", ".mpg"};
     private String[] inputs;
 
-    public FFmpegOptionPanel(MasterFrame masterFrame, CommandListener commandListener) {
+    public FFmpegOptionPanel(MasterFrame masterFrame) {
         this.setLayout(new BorderLayout());
         this.add(dropDownPanel(), BorderLayout.CENTER);
         JTextField commandLine = new JTextField();
@@ -30,13 +30,11 @@ public class FFmpegOptionPanel extends JPanel {
                 String[] commands;
                 if (!commandLine.getText().isEmpty()) {
                     commands = getFfmpegCommandsWithCLI(commandLine.getText());
-                    commandListener.onCommandsAvailable(commands);
                 } else {
                     commands = getFFmpegCommands();
-                    commandListener.onCommandsAvailable(commands);
                 }
             } else {
-                commandListener.onNoInputSelected();
+                System.out.println("No input selected!");
             }
         });
         this.add(commandLine, BorderLayout.SOUTH);
