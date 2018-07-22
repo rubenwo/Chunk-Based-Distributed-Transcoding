@@ -23,13 +23,15 @@ public class MasterClient {
 
     private String ID = UUID.randomUUID().toString();
 
+    private boolean running = true;
+
     public MasterClient(String serverIP) {
         try {
             init(serverIP);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        new Thread(new UpdaterService()).start();
         masterFrame = new MasterFrame(onlineEncoders);
     }
 
@@ -54,5 +56,34 @@ public class MasterClient {
 
     public HashMap<String, Double> getEncoderProgress() {
         return encoderProgress;
+    }
+
+    class UpdaterService implements Runnable {
+
+        @Override
+        public void run() {
+            System.out.println("Running updater service.");
+            while (running) {
+                try {
+                    byte dataType = fromServer.readByte();
+                    switch (dataType) {
+                        case 0:
+                            try {
+                                onlineEncoders = (ArrayList<String>) fromServer.readObject();
+                            } catch (ClassNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                        case 1:
+                            try {
+                                encoderProgress = (HashMap<String, Double>) fromServer.readObject();
+                            } catch (ClassNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

@@ -8,10 +8,12 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class MultiThreadedServer implements Runnable, ClientStatusListener {
+public class MultiThreadedServer implements Runnable, ClientStatusListener, EncoderProgressListener {
     private DistributingManager distributingManager;
 
+    private HashMap<String, Double> encoderProgress = new HashMap<>();
     private ArrayList<String> onlineEncoders = new ArrayList<>();
     private ArrayList<ConnectionHandler> masters = new ArrayList<>();
     private ArrayList<ConnectionHandler> encoders = new ArrayList<>();
@@ -43,13 +45,18 @@ public class MultiThreadedServer implements Runnable, ClientStatusListener {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            new Thread(new ConnectionHandler(socket, onlineEncoders, this)).start();
+            new Thread(new ConnectionHandler(socket, onlineEncoders, this, this)).start();
         }
     }
 
     private void updateOnlineClientList() {
         for (ConnectionHandler masterHandler : masters)
             masterHandler.updateOnlineClientList(onlineEncoders);
+    }
+
+    private void updateEncoderProgress() {
+        for (ConnectionHandler masterHandler : masters)
+            masterHandler.updateProgressMap(encoderProgress);
     }
 
     @Override
@@ -65,6 +72,7 @@ public class MultiThreadedServer implements Runnable, ClientStatusListener {
     @Override
     public void onEncoderOnline(ConnectionHandler encoderHandler) {
         encoders.add(encoderHandler);
+        encoderProgress.put(encoderHandler.getClientID(), -1.0);
         onlineEncoders.add(encoderHandler.getClientID());
         updateOnlineClientList();
     }
@@ -72,7 +80,18 @@ public class MultiThreadedServer implements Runnable, ClientStatusListener {
     @Override
     public void onEncoderOffline(ConnectionHandler encoderHandler) {
         encoders.removeIf(e -> e.equals(encoderHandler));
+        encoderProgress.remove(encoderHandler.getClientID());
         onlineEncoders.removeIf(e -> e.equals(encoderHandler.getClientID()));
         updateOnlineClientList();
+    }
+
+    @Override
+    public void onProgressUpdate(String clientID, double progress) {
+        encoderProgress.put(clientID, progress);
+        updateEncoderProgress();
+    }
+
+    public void shutdown() {
+        running = false;
     }
 }

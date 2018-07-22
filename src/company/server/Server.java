@@ -16,6 +16,7 @@ public class Server {
 
         assert (ipAddress != null);
         new ServerGUI(ipAddress);
+        new Thread(new MultiThreadedServer(ipAddress)).start();
     }
 
     public static void main(String[] args) {
