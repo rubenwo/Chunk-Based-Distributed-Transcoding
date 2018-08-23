@@ -1,11 +1,11 @@
 package utilstest;
 
-import company.utils.OperatingSystem;
-import company.utils.TempDirCreator;
-import company.utils.ffmpeghandler.ChunkGenerater;
-import company.utils.ffmpeghandler.CommandType;
-import company.utils.ffmpeghandler.FFmpegListener;
-import company.utils.filehandler.FilesHandler;
+import com.utils.OperatingSystem;
+import com.utils.TempDirCreator;
+import com.utils.ffmpeghandler.ChunkGenerater;
+import com.utils.ffmpeghandler.CommandType;
+import com.utils.ffmpeghandler.FFmpegListener;
+import com.utils.filehandler.FilesHandler;
 
 import java.io.IOException;
 import java.util.UUID;

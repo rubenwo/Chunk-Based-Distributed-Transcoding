@@ -1,6 +1,6 @@
 package guitests;
 
-import company.masterclient.GUI.MasterFrame;
+import com.masterclient.GUI.MasterFrame;
 
 import java.util.ArrayList;
 import java.util.UUID;

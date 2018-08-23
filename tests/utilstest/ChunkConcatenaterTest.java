@@ -1,8 +1,8 @@
 package utilstest;
 
-import company.utils.ffmpeghandler.ChunkConcatenater;
-import company.utils.ffmpeghandler.CommandType;
-import company.utils.ffmpeghandler.FFmpegListener;
+import com.utils.ffmpeghandler.ChunkConcatenater;
+import com.utils.ffmpeghandler.CommandType;
+import com.utils.ffmpeghandler.FFmpegListener;
 
 import java.io.IOException;
 

@@ -1,6 +1,6 @@
 package commandlinetests;
 
-import company.encoderclient.CLI.EncoderCLI;
+import com.encoderclient.CLI.EncoderCLI;
 
 public class EncoderCLITest {
     public static void main(String[] args) {

@@ -1,6 +1,6 @@
 package guitests;
 
-import company.encoderclient.GUI.EncoderFrame;
+import com.encoderclient.GUI.EncoderFrame;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

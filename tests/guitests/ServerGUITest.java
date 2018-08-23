@@ -1,6 +1,6 @@
 package guitests;
 
-import company.server.GUI.ServerGUI;
+import com.server.GUI.ServerGUI;
 
 import java.io.IOException;
 import java.net.InetAddress;

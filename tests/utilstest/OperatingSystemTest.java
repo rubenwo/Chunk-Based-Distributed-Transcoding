@@ -1,6 +1,6 @@
 package utilstest;
 
-import company.utils.OperatingSystem;
+import com.utils.OperatingSystem;
 
 public class OperatingSystemTest {
     public static void main(String[] args) {
