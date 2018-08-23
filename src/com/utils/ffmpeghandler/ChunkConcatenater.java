@@ -1,4 +1,4 @@
-package company.utils.ffmpeghandler;
+package com.utils.ffmpeghandler;
 
 public class ChunkConcatenater {
     public static void ConcatChunks(String encoderPath, String filePath, String output, FFmpegListener ffmpegListener) {

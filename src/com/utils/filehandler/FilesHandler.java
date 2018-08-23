@@ -1,6 +1,6 @@
-package company.utils.filehandler;
+package com.utils.filehandler;
 
-import company.Constants;
+import com.Constants;
 
 import java.io.File;
 import java.io.IOException;

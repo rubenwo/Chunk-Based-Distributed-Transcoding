@@ -1,4 +1,4 @@
-package company.utils.filehandler;
+package com.utils.filehandler;
 
 public class FileReceiver implements Runnable {
     private FileReceiverListener receiverListener;

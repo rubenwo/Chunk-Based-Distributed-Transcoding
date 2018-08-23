@@ -1,6 +1,6 @@
-package company.encoderclient.CLI;
+package com.encoderclient.CLI;
 
-import company.encoderclient.EncoderClient;
+import com.encoderclient.EncoderClient;
 
 import java.util.Scanner;
 

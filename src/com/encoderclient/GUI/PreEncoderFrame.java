@@ -1,6 +1,6 @@
-package company.encoderclient.GUI;
+package com.encoderclient.GUI;
 
-import company.encoderclient.EncoderClient;
+import com.encoderclient.EncoderClient;
 
 import javax.swing.*;
 import java.awt.*;

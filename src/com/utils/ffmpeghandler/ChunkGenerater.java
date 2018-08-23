@@ -1,6 +1,6 @@
-package company.utils.ffmpeghandler;
+package com.utils.ffmpeghandler;
 
-import company.Constants;
+import com.Constants;
 
 import java.io.File;
 import java.io.IOException;

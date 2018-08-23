@@ -1,4 +1,4 @@
-package company.utils.ffmpeghandler;
+package com.utils.ffmpeghandler;
 
 import java.io.BufferedReader;
 import java.io.IOException;

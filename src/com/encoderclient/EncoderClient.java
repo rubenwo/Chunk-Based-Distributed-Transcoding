@@ -1,15 +1,15 @@
-package company.encoderclient;
+package com.encoderclient;
 
-import company.Constants;
-import company.encoderclient.GUI.EncoderFrame;
-import company.utils.ExtensionGenerator;
-import company.utils.OperatingSystem;
-import company.utils.TempDirCreator;
-import company.utils.ffmpeghandler.CommandType;
-import company.utils.ffmpeghandler.FFmpegHandler;
-import company.utils.ffmpeghandler.FFmpegListener;
-import company.utils.filehandler.FileReceiver;
-import company.utils.filehandler.FileReceiverListener;
+import com.Constants;
+import com.encoderclient.GUI.EncoderFrame;
+import com.utils.ExtensionGenerator;
+import com.utils.OperatingSystem;
+import com.utils.TempDirCreator;
+import com.utils.ffmpeghandler.CommandType;
+import com.utils.ffmpeghandler.FFmpegHandler;
+import com.utils.ffmpeghandler.FFmpegListener;
+import com.utils.filehandler.FileReceiver;
+import com.utils.filehandler.FileReceiverListener;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

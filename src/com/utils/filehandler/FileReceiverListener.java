@@ -1,4 +1,4 @@
-package company.utils.filehandler;
+package com.utils.filehandler;
 
 public interface FileReceiverListener {
     void onFileReceiverOnline();

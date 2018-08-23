@@ -1,4 +1,4 @@
-package company.utils.ffmpeghandler;
+package com.utils.ffmpeghandler;
 
 public interface FFmpegListener {
     void onEncoderStart(String filename);
