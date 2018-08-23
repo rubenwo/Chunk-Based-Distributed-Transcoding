@@ -58,8 +58,8 @@ public class DetailedProgressFrame implements ActionListener {
     }
 
     public void dispose() {
-        frame.dispose();
         timer.stop();
+        frame.dispose();
     }
 
     public void setCurrentJobFileName(String fileName) {

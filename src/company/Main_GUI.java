@@ -1,11 +1,14 @@
 package company;
 
 import company.encoderclient.GUI.PreEncoderFrame;
+import company.masterclient.GUI.MasterFrame;
 import company.masterclient.GUI.PreMasterFrame;
+import company.masterclient.MasterClient;
 import company.server.Server;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Main_GUI {
 
@@ -31,14 +34,15 @@ public class Main_GUI {
     }
 
     private JButton[] getButtons() {
-        JButton[] buttons = new JButton[3];
+        JButton[] buttons = new JButton[2];
         buttons[0] = new JButton("Create a Server");
-        buttons[1] = new JButton("Create a Master GUI");
-        buttons[2] = new JButton("Create A Slave GUI");
+        buttons[1] = new JButton("Create A Slave GUI");
 
-        buttons[0].addActionListener(e -> new Server());
-        buttons[1].addActionListener(e -> new PreMasterFrame());
-        buttons[2].addActionListener(e -> new PreEncoderFrame());
+        buttons[0].addActionListener(e -> {
+            new Server();
+            new MasterClient("192.168.2.125");
+        });
+        buttons[1].addActionListener(e -> new PreEncoderFrame());
 
         for (JButton button : buttons) {
             button.setPreferredSize(new Dimension(200, 75));
