@@ -18,6 +18,10 @@ public class FFmpegOptionPanel extends JPanel {
 
 
     private String[] inputs;
+    private String command;
+
+    private JTextField preview = new JTextField("Preview ffmpeg command: " + command);
+
 
     public FFmpegOptionPanel(MasterFrame masterFrame) {
         generateDefaultSettings();
@@ -26,17 +30,17 @@ public class FFmpegOptionPanel extends JPanel {
         this.setLayout(new BorderLayout());
         this.add(dropDownPanel(), BorderLayout.CENTER);
 
-        JTextField commandLine = new JTextField();
         JButton startEncoding = new JButton("Start Encoding");
         startEncoding.addActionListener(e -> {
             inputs = masterFrame.getInputs();
             if (inputs != null) {
-                String command;
+                /*
                 if (!commandLine.getText().isEmpty()) {
                     command = commandLine.getText();
                 } else {
                     command = generateCommand();
                 }
+                */
                 int reply = JOptionPane.showConfirmDialog(null,
                         "Are you sure you want to transcode these files?",
                         "Are you sure?",
@@ -61,7 +65,8 @@ public class FFmpegOptionPanel extends JPanel {
                         null);
             }
         });
-        this.add(commandLine, BorderLayout.SOUTH);
+        preview.setEditable(false);
+        this.add(preview, BorderLayout.SOUTH);
         this.add(startEncoding, BorderLayout.WEST);
     }
 
@@ -85,62 +90,83 @@ public class FFmpegOptionPanel extends JPanel {
         videoEncoderLibsBox.addActionListener(e -> {
             System.out.println(videoEncoderLibsBox.getSelectedItem());
             ffmpegCommandMap.replace("videoEncoder", (String) videoEncoderLibsBox.getSelectedItem());
+            command = generateCommand();
+            preview.setText("Preview ffmpeg command: " + command);
         });
         videoPresetsBox.addActionListener(e -> {
             System.out.println(videoPresetsBox.getSelectedItem());
             ffmpegCommandMap.replace("videoPreset", (String) videoPresetsBox.getSelectedItem());
+            command = generateCommand();
+            preview.setText("Preview ffmpeg command: " + command);
         });
         videoTunerBox.addActionListener(e -> {
             System.out.println(videoTunerBox.getSelectedItem());
             ffmpegCommandMap.replace("videoTuner", (String) videoTunerBox.getSelectedItem());
+            command = generateCommand();
+            preview.setText("Preview ffmpeg command: " + command);
         });
         crfBox.addActionListener(e -> {
             System.out.println(crfBox.getSelectedItem());
             ffmpegCommandMap.replace("crf", (String) crfBox.getSelectedItem());
+            command = generateCommand();
+            preview.setText("Preview ffmpeg command: " + command);
         });
 
         audioEncoderLibsBox.addActionListener(e -> {
             String audioEnc = audioEncoderLibsBox.getSelectedItem().toString();
             switch (audioEnc) {
                 case "Select an Audio Encoder (Default = Copy)":
+                    ffmpegCommandMap.replace("audioEncoder", audioEnc);
                     audioBitrateBox.removeAllItems();
                     audioBitrateBox.addItem("Copy");
                     break;
                 case "mp3":
+                    ffmpegCommandMap.replace("audioEncoder", audioEnc);
                     audioBitrateBox.removeAllItems();
                     audioBitrateBox.setModel(new DefaultComboBoxModel<>(audioBitrateMap.get("mp3")));
                     break;
                 case "aac":
+                    ffmpegCommandMap.replace("audioEncoder", audioEnc);
                     audioBitrateBox.removeAllItems();
                     audioBitrateBox.setModel(new DefaultComboBoxModel<>(audioBitrateMap.get("aac")));
                     break;
                 case "ac3":
+                    ffmpegCommandMap.replace("audioEncoder", audioEnc);
                     audioBitrateBox.removeAllItems();
                     audioBitrateBox.setModel(new DefaultComboBoxModel<>(audioBitrateMap.get("ac3")));
                     break;
                 case "eac3":
+                    ffmpegCommandMap.replace("audioEncoder", audioEnc);
                     audioBitrateBox.removeAllItems();
                     audioBitrateBox.setModel(new DefaultComboBoxModel<>(audioBitrateMap.get("eac3")));
                     break;
                 case "opus":
+                    ffmpegCommandMap.replace("audioEncoder", audioEnc);
                     audioBitrateBox.removeAllItems();
                     audioBitrateBox.setModel(new DefaultComboBoxModel<>(audioBitrateMap.get("opus")));
                     break;
                 case "vorbis":
+                    ffmpegCommandMap.replace("audioEncoder", audioEnc);
                     audioBitrateBox.removeAllItems();
                     audioBitrateBox.setModel(new DefaultComboBoxModel<>(audioBitrateMap.get("vorbis")));
                     break;
             }
+            command = generateCommand();
+            preview.setText("Preview ffmpeg command: " + command);
         });
 
         audioBitrateBox.addActionListener(e -> {
             System.out.println(audioBitrateBox.getSelectedItem());
             ffmpegCommandMap.replace("audioBitrate", (String) audioBitrateBox.getSelectedItem());
+            command = generateCommand();
+            preview.setText("Preview ffmpeg command: " + command);
         });
 
         outputFormatBox.addActionListener(e -> {
             System.out.println(outputFormatBox.getSelectedItem());
             ffmpegCommandMap.replace("outputFormat", (String) outputFormatBox.getSelectedItem());
+            command = generateCommand();
+            preview.setText("Preview ffmpeg command: " + command);
         });
 
         dropDownPanel.add(videoEncoderLibsBox);
